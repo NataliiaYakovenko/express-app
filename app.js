@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { tasksController } = require("./controllers");
+const  tasksController  = require("./controllers");
 
 const app = express();
 

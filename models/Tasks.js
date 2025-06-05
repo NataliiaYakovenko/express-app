@@ -6,7 +6,7 @@ const tasksBd = new Map();
 
 class Task {
   constructor(title, deadline, isDone = false) {
-    this.id = uuidv4;
+    this.id = uuidv4();
     this.title = title;
     this.deadline = deadline;
     this.isDone = isDone;

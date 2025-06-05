@@ -24,7 +24,7 @@ module.exports.getOneTask = (req, res, next) => {
   }
 };
 
-module.exports.deleteOnetask = (req, res, next) => {
+module.exports.deleteOneTask = (req, res, next) => {
   const { id } = req.params;
   const task = Task.findOneTask(Number(id));
 
