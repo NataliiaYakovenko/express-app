@@ -1,7 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
 
-const { format } = require("date-fns");
-
 const tasksBd = new Map();
 
 class Task {
@@ -16,21 +14,21 @@ class Task {
     tasksBd.set(this.id, this);
   }
 
-  findOneTask(id) {
-    tasksBd.get(this.id, this);
+  static findOneTask(id) {
+    return tasksBd.get(id);
   }
 
-  findAllTask() {
-    tasksBd.get(...this, values());
+  static findAllTask() {
+    return [...tasksBd.values()];
   }
 
-  deleteTask() {
-    tasksBd.delete(this.id);
+  static deleteTask() {
+    return tasksBd.delete(id);
   }
 
   updateTask(updateValue) {
     tasksBd.set(this.id, { ...this, ...updateValue });
-    tasksBd.get(this.id);
+    return tasksBd.get(this.id);
   }
 }
 
