@@ -1,1 +1,1 @@
-GET http://localhost:5000/task/1/complation?isDone HTTP/1.1
+GET http://localhost:5000/task/1/complation?isDone=true HTTP/1.1

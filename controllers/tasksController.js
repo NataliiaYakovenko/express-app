@@ -15,9 +15,9 @@ module.exports.getAllTasks = (req, res, next) => {
 
 module.exports.getOneTask = (req, res, next) => {
   const { id } = req.params;
-  const task = Task.findOneTask(Number(id));
+  const task = Task.findOneTask(id);
 
-  if (id) {
+  if (task) {
     res.status(200).send(task);
   } else {
     res.status(404).end();
@@ -26,12 +26,12 @@ module.exports.getOneTask = (req, res, next) => {
 
 module.exports.deleteOneTask = (req, res, next) => {
   const { id } = req.params;
-  const task = Task.findOneTask(Number(id));
+  const siDelete = Task.deleteTask(id);
 
-  if (id) {
-    res.status(200).send(task);
+  if (siDelete) {
+    res.status(200).send("Task deleted");
   } else {
-    res.status(404).end();
+    res.status(404).end("Task not found");
   }
 };
 
@@ -40,10 +40,10 @@ module.exports.updateTask = (req, res, next) => {
     body,
     params: { id },
   } = req;
-  const task = Task.findOneTask(Number(id));
+  const task = Task.findOneTask(id);
 
   if (task) {
-    const updateData = Task.updateTask(body);
+    const updateData = Task.updateTask(id, body);
     res.status(200).send(updateData);
   } else {
     res.status(404).end();
@@ -55,6 +55,12 @@ module.exports.completionTask = (req, res, next) => {
     params: { id },
     query: { isDone },
   } = req;
+  const task = Task.findOneTask(id);
+  const updated = Task.updateTask(id, { isDone: isDone === "true" });
 
-  res.status(200).send("Task had done");
+  if (task) {
+    res.status(200).send(updated);
+  } else {
+    res.status(404).end("Task not found");
+  }
 };
