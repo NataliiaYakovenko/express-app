@@ -26,8 +26,6 @@ class Task {
   }
 
   static updateTask(id, updateValue) {
-    // tasksBd.set(this.id, { ...this, ...updateValue });
-    // return tasksBd.get(this.id);
     const task = tasksBd.get(id);
 
     if (!task) {
