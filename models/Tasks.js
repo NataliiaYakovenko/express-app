@@ -3,11 +3,10 @@ const { v4: uuidv4 } = require("uuid");
 const tasksBd = new Map();
 
 class Task {
-  constructor(title, deadline, isDone = false) {
+  constructor(title, deadline) {
     this.id = uuidv4();
     this.title = title;
     this.deadline = deadline;
-    this.isDone = isDone;
   }
 
   addTask() {
@@ -22,13 +21,42 @@ class Task {
     return [...tasksBd.values()];
   }
 
-  static deleteTask() {
+  static deleteTask(id) {
     return tasksBd.delete(id);
   }
 
-  updateTask(updateValue) {
-    tasksBd.set(this.id, { ...this, ...updateValue });
-    return tasksBd.get(this.id);
+  static updateTask(id, updateValue) {
+    // tasksBd.set(this.id, { ...this, ...updateValue });
+    // return tasksBd.get(this.id);
+    const task = tasksBd.get(id);
+
+    if (!task) {
+      return null;
+    }
+
+    const titleKeys = ["deadline", "task"];
+    const titlePart = {};
+    const rootPart = {};
+
+    for (const key in updateValue) {
+      if (titleKeys.includes(key)) {
+        titlePart[key] = updateValue[key];
+      } else {
+        rootPart[key] = updateValue[key];
+      }
+    }
+
+    const structuredUpdate = {
+      ...rootPart,
+      title: {
+        ...task.title,
+        ...titlePart,
+      },
+    };
+
+    const updateTask = { ...task, ...structuredUpdate };
+    tasksBd.set(id, updateTask);
+    return updateTask;
   }
 }
 
