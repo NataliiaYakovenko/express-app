@@ -10,7 +10,8 @@ module.exports.validateTasktOnCreate = async (req, res, next) => {
     req.body = validateTask;
     next();
   } catch (e) {
-    res.status(422).send({ message: e.errors[0] });
+    // res.status(422).send({ message: e.errors[0] });
+    next(e);
   }
 };
 
@@ -21,6 +22,7 @@ module.exports.validateTaskOnUpdate = async (req, res, next) => {
     req.body = validateTask;
     next();
   } catch (e) {
-    res.status(422).send({ message: e.errors[0] });
+    // res.status(422).send({ message: e.errors[0] });
+    next(e);
   }
 };

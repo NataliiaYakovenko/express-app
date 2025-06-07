@@ -1,8 +1,14 @@
 const express = require("express");
+
 const {
   validateTasktOnCreate,
   validateTaskOnUpdate,
 } = require("./middleware/validate");
+
+const {
+  validationErrorHandler,
+  errorHandler,
+} = require("./middleware/errorHandlers");
 
 const tasksController = require("./controllers/tasksController");
 
@@ -33,5 +39,7 @@ app.put(
 );
 
 app.get("/task/:id/completion", tasksController.completionTask);
+
+app.use(validationErrorHandler, errorHandler);
 
 module.exports = app;
