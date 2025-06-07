@@ -1,10 +1,7 @@
-const yup = require("yup");
-
-const CREATE_TASK_VALIDATION_SCHEMA = yup.object({
-  title: yup.string().trim().min(2).max(20).required(),
-  deadline: yup.date().min(new Date()),
-  isDone: yup.boolean().default(false),
-});
+const {
+  CREATE_TASK_VALIDATION_SCHEMA,
+  UPDATE_TASK_VALIDATION_SCHEMA,
+} = require("../utils/validationSchemas");
 
 module.exports.validateTasktOnCreate = async (req, res, next) => {
   const { body } = req;
@@ -17,6 +14,14 @@ module.exports.validateTasktOnCreate = async (req, res, next) => {
   }
 };
 
-module.exports.validateTaskOnUpdate = (req, res, next) => {
+module.exports.validateTaskOnUpdate = async (req, res, next) => {
+  const { body } = req;
+  try {
+    const validateTask = await UPDATE_TASK_VALIDATION_SCHEMA.validate(body);
+    req.body = validateTask;
+    next();
+  } catch (e) {
+    res, statuse(422).send("Validation Error");
+  }
   next();
 };

@@ -4,5 +4,5 @@ Content-Type: application/json
 {
     "title": "To buy tickets",
     "deadline": "2025-06-20",
-    "isDone": "false"
+    "isDone": "0"
 }
