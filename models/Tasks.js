@@ -33,7 +33,7 @@ class Task {
       return null;
     }
 
-    const titleKeys = ["deadline", "task"];
+    const titleKeys = ["deadline", "title"];
     const titlePart = {};
     const rootPart = {};
 

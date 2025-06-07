@@ -1,6 +1,7 @@
-PUT http://localhost:5000/task/5954d28c-a1e1-448c-a92d-a2f58a3acf6d HTTP/1.1
+PUT http://localhost:5000/task/fd719dc6-c8ac-4f66-9f6a-5b45aa9f9435 HTTP/1.1
 Content-Type: application/json
 
 {
-    "deadline": "2025-07-25"
+    "title": "Information",
+    "deadline": "2024-07-28"
 }
